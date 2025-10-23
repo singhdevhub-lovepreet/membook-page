@@ -184,12 +184,16 @@ const InteractiveKnowledgeGraph = () => {
 
     // Fit the network after stabilization with zoom
     network.once('stabilizationIterationsDone', () => {
+      // Responsive zoom level - more zoomed in on mobile
+      const isMobile = window.innerWidth < 768;
+      const zoomScale = isMobile ? 1.8 : 1.4; // More zoom on mobile
+      
       network.fit({
         animation: {
           duration: 1000,
           easingFunction: 'easeInOutQuad'
         },
-        scale: 1.4 // Fixed zoom level - more zoomed in for mobile
+        scale: zoomScale
       });
 
       // Disable zoom completely
@@ -241,9 +245,12 @@ const InteractiveKnowledgeGraph = () => {
 
     // Prevent zoom with wheel events
     network.on('zoom', () => {
-      // Reset zoom to prevent any zooming
+      // Reset zoom to prevent any zooming - responsive
+      const isMobile = window.innerWidth < 768;
+      const zoomScale = isMobile ? 1.8 : 1.4;
+      
       network.moveTo({
-        scale: 1.4,
+        scale: zoomScale,
         animation: {
           duration: 100,
           easingFunction: 'easeInOutQuad'

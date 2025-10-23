@@ -155,18 +155,18 @@ const BentoSection = () => {
             <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6 max-w-3xl">
               Find anything in milliseconds with semantic search. Natural language understanding means you can search the way you think.
             </p>
-            <div className="grid grid-cols-3 gap-3 md:gap-4 max-w-2xl">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
-                <div className="text-xl md:text-2xl font-bold text-membook-green mb-1">&lt;100ms</div>
-                <div className="text-xs md:text-sm text-gray-300">Speed</div>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 max-w-2xl">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-membook-green mb-1 leading-tight">&lt;500ms</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-gray-300">Speed</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
-                <div className="text-xl md:text-2xl font-bold text-true-turquoise mb-1">∞</div>
-                <div className="text-xs md:text-sm text-gray-300">Links</div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-100 mb-1 leading-tight">∞</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-gray-300">Links</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
-                <div className="text-xl md:text-2xl font-bold text-apricot mb-1">24/7</div>
-                <div className="text-xs md:text-sm text-gray-300">Active</div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-apricot mb-1 leading-tight">24/7</div>
+                <div className="text-[10px] sm:text-xs md:text-sm text-gray-300">Active</div>
               </div>
             </div>
           </motion.div>

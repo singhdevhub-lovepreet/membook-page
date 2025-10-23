@@ -81,7 +81,7 @@ const KnowledgeGraphSection = () => {
               icon: '🔍',
               title: 'Instant Recall',
               description: 'Find anything you\'ve saved with natural language search',
-              stat: '<100ms'
+              stat: '<500ms'
             },
             {
               icon: '📊',
