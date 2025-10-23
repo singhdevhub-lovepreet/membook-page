@@ -4,6 +4,7 @@
   "description": "Landing page for Membook app",
   "private": true,
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
