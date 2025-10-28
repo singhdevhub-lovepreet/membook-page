@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-true-turquoise opacity-[0.02] blur-[150px] rounded-full -z-10"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
@@ -28,22 +28,35 @@ const Footer = () => {
             </p>
             {/* Social Links */}
             <div className="flex gap-4">
-              {[
-                { icon: '𝕏', label: 'Twitter' },
-                { icon: '📧', label: 'Email' },
-                { icon: '💬', label: 'Discord' }
-              ].map((social, index) => (
-                <motion.button
-                  key={index}
-                  onClick={(e) => e.preventDefault()}
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-membook-green/20 hover:border-membook-green/50 transition-all duration-300 cursor-pointer group"
-                  aria-label={social.label}
-                >
-                  <span className="text-xl group-hover:scale-110 transition-transform">{social.icon}</span>
-                </motion.button>
-              ))}
+              <motion.button
+                onClick={(e) => e.preventDefault()}
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-membook-green/20 hover:border-membook-green/50 transition-all duration-300 cursor-pointer group"
+                aria-label="Twitter"
+              >
+                <span className="text-xl group-hover:scale-110 transition-transform">𝕏</span>
+              </motion.button>
+              
+              <motion.a
+                href="mailto:lpsk5713@gmail.com"
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-membook-green/20 hover:border-membook-green/50 transition-all duration-300 cursor-pointer group"
+                aria-label="Email"
+              >
+                <span className="text-xl group-hover:scale-110 transition-transform">📧</span>
+              </motion.a>
+              
+              <motion.button
+                onClick={(e) => e.preventDefault()}
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-membook-green/20 hover:border-membook-green/50 transition-all duration-300 cursor-pointer group"
+                aria-label="Discord"
+              >
+                <span className="text-xl group-hover:scale-110 transition-transform">💬</span>
+              </motion.button>
             </div>
           </div>
 
@@ -100,6 +113,49 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-white text-lg mb-6 uppercase tracking-wide">Support</h3>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="mailto:lpsk5713@gmail.com"
+                  className="text-gray-300 hover:text-membook-green transition-all duration-200 text-base hover:translate-x-1 inline-block font-medium"
+                >
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:lpsk5713@gmail.com"
+                  className="text-gray-300 hover:text-membook-green transition-all duration-200 text-base hover:translate-x-1 inline-block font-medium"
+                >
+                  Help Center
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.memlabs.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-membook-green transition-all duration-200 text-base hover:translate-x-1 inline-block font-medium"
+                >
+                  Support
+                </a>
+              </li>
+            </ul>
+            
+            {/* Support Email Display */}
+            <div className="mt-8 p-4 bg-membook-green/10 rounded-lg border border-membook-green/30">
+              <p className="text-gray-300 text-xs uppercase tracking-wide mb-2 font-semibold">Support Email</p>
+              <a 
+                href="mailto:lpsk5713@gmail.com"
+                className="text-membook-green hover:text-true-turquoise text-sm font-semibold transition-colors break-all"
+              >
+                lpsk5713@gmail.com
+              </a>
+            </div>
           </div>
         </div>
 
