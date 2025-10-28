@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
@@ -8,9 +9,10 @@ import KnowledgeGraphSection from './components/KnowledgeGraphSection';
 import OrbSection from './components/OrbSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import TermsOfUse from './components/TermsOfUse';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
-function App() {
-
+function HomePage() {
   return (
     <div className="relative w-full overflow-x-hidden bg-off-black">
       {/* Navigation */}
@@ -41,8 +43,20 @@ function App() {
         </div>
         <Footer />
       </div>
-      <Analytics />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/terms" element={<TermsOfUse />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+      </Routes>
+      <Analytics />
+    </Router>
   );
 }
 

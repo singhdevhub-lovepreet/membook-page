@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
@@ -54,7 +55,7 @@ const Footer = () => {
                 <li key={index}>
                   <button
                     onClick={(e) => e.preventDefault()}
-                    className="text-gray-400 hover:text-membook-green transition-colors duration-200 bg-transparent border-0 cursor-pointer text-left text-base hover:translate-x-1 transition-transform inline-block"
+                    className="text-gray-400 hover:text-membook-green transition-all duration-200 bg-transparent border-0 cursor-pointer text-left text-base hover:translate-x-1 inline-block"
                   >
                     {item}
                   </button>
@@ -66,16 +67,38 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-white text-lg mb-6 uppercase tracking-wide">Company</h3>
             <ul className="space-y-4">
-              {['About', 'Blog', 'Privacy', 'Terms'].map((item, index) => (
-                <li key={index}>
-                  <button
-                    onClick={(e) => e.preventDefault()}
-                    className="text-gray-400 hover:text-membook-green transition-colors duration-200 bg-transparent border-0 cursor-pointer text-left text-base hover:translate-x-1 transition-transform inline-block"
-                  >
-                    {item}
-                  </button>
-                </li>
-              ))}
+              <li>
+                <button
+                  onClick={(e) => e.preventDefault()}
+                  className="text-gray-400 hover:text-membook-green transition-all duration-200 bg-transparent border-0 cursor-pointer text-left text-base hover:translate-x-1 inline-block"
+                >
+                  About
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => e.preventDefault()}
+                  className="text-gray-400 hover:text-membook-green transition-all duration-200 bg-transparent border-0 cursor-pointer text-left text-base hover:translate-x-1 inline-block"
+                >
+                  Blog
+                </button>
+              </li>
+              <li>
+                <Link
+                  to="/privacy"
+                  className="text-gray-400 hover:text-membook-green transition-all duration-200 text-base hover:translate-x-1 inline-block"
+                >
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terms"
+                  className="text-gray-400 hover:text-membook-green transition-all duration-200 text-base hover:translate-x-1 inline-block"
+                >
+                  Terms
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

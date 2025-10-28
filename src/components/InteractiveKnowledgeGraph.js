@@ -4,6 +4,8 @@ import { DataSet } from 'vis-data';
 
 const InteractiveKnowledgeGraph = () => {
   const networkRef = useRef(null);
+  const networkInstanceRef = useRef(null);
+  const floatingIntervalRef = useRef(null);
 
   useEffect(() => {
     if (!networkRef.current) return;
@@ -181,6 +183,7 @@ const InteractiveKnowledgeGraph = () => {
     };
 
     const network = new Network(networkRef.current, { nodes, edges }, options);
+    networkInstanceRef.current = network;
 
     // Fit the network after stabilization with zoom
     network.once('stabilizationIterationsDone', () => {
@@ -205,34 +208,45 @@ const InteractiveKnowledgeGraph = () => {
       });
 
       // Start gentle horizontal floating motion
-      const floatingInterval = setInterval(() => {
-        // Add small random forces to random nodes to keep them moving gently (horizontal only)
-        const nodeIds = nodes.getIds();
-        const numNodesToNudge = Math.floor(Math.random() * 2) + 1; // Nudge 1-2 nodes
-        
-        for (let i = 0; i < numNodesToNudge; i++) {
-          const randomNodeId = nodeIds[Math.floor(Math.random() * nodeIds.length)];
+      floatingIntervalRef.current = setInterval(() => {
+        // Check if network still exists before trying to use it
+        if (!networkInstanceRef.current || !networkRef.current) {
+          if (floatingIntervalRef.current) {
+            clearInterval(floatingIntervalRef.current);
+            floatingIntervalRef.current = null;
+          }
+          return;
+        }
+
+        try {
+          // Add small random forces to random nodes to keep them moving gently (horizontal only)
+          const nodeIds = nodes.getIds();
+          const numNodesToNudge = Math.floor(Math.random() * 2) + 1; // Nudge 1-2 nodes
           
-          // Apply very small random velocity in horizontal direction only
-          const positions = network.getPositions([randomNodeId]);
-          if (positions[randomNodeId]) {
-            const pos = positions[randomNodeId];
-            const direction = Math.random() > 0.5 ? 1 : -1; // Left or right
-            const force = (2 + Math.random() * 4) * direction; // Reduced force
+          for (let i = 0; i < numNodesToNudge; i++) {
+            const randomNodeId = nodeIds[Math.floor(Math.random() * nodeIds.length)];
             
-            network.moveNode(randomNodeId, 
-              pos.x + force, 
-              pos.y // Keep Y position the same
-            );
+            // Apply very small random velocity in horizontal direction only
+            const positions = networkInstanceRef.current.getPositions([randomNodeId]);
+            if (positions && positions[randomNodeId]) {
+              const pos = positions[randomNodeId];
+              const direction = Math.random() > 0.5 ? 1 : -1; // Left or right
+              const force = (2 + Math.random() * 4) * direction; // Reduced force
+              
+              networkInstanceRef.current.moveNode(randomNodeId, 
+                pos.x + force, 
+                pos.y // Keep Y position the same
+              );
+            }
+          }
+        } catch (error) {
+          // If any error occurs (e.g., network destroyed), clear the interval
+          if (floatingIntervalRef.current) {
+            clearInterval(floatingIntervalRef.current);
+            floatingIntervalRef.current = null;
           }
         }
       }, 3000); // Nudge every 3 seconds (less frequent)
-
-      // Store interval ID for cleanup
-      const container = networkRef.current;
-      if (container) {
-        container.floatingInterval = floatingInterval;
-      }
     });
 
     // Disable node click information display
@@ -260,20 +274,33 @@ const InteractiveKnowledgeGraph = () => {
 
     // Add some hover effects
     network.on('hoverNode', () => {
-      networkRef.current.style.cursor = 'pointer';
+      if (networkRef.current) {
+        networkRef.current.style.cursor = 'pointer';
+      }
     });
 
     network.on('blurNode', () => {
-      networkRef.current.style.cursor = 'default';
+      if (networkRef.current) {
+        networkRef.current.style.cursor = 'default';
+      }
     });
 
+    // Cleanup function
     return () => {
-      const container = networkRef.current;
-      if (container?.floatingInterval) {
-        clearInterval(container.floatingInterval);
+      // Clear the floating interval
+      if (floatingIntervalRef.current) {
+        clearInterval(floatingIntervalRef.current);
+        floatingIntervalRef.current = null;
       }
-      if (network) {
-        network.destroy();
+      
+      // Destroy the network instance
+      if (networkInstanceRef.current) {
+        try {
+          networkInstanceRef.current.destroy();
+        } catch (error) {
+          // Ignore errors during cleanup
+        }
+        networkInstanceRef.current = null;
       }
     };
   }, []);
